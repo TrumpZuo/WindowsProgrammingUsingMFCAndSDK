@@ -1,0 +1,10 @@
+﻿  Main.cpp
+C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\lab01\MyGame.h(86,36): warning C4244: “参数”: 从“WPARAM”转换到“wchar_t”，可能丢失数据
+C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\lab01\MyGame.h(121,84): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\lab01\MyGame.h(127,84): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\lab01\MyGame.h(134,84): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\lab01\MyGame.h(147,85): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\lab01\MyGame.h(59,8): warning C4101: “gcInput”: 未引用的局部变量
+C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\lab01\MyGame.h(204,1): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\lab01\Main.cpp(24,12): warning C4244: “return”: 从“WPARAM”转换到“int”，可能丢失数据
+  lab01.vcxproj -> C:\Users\Administrator\Desktop\WindowsProg\Lab_01\Lab_01\x64\Debug\lab01.exe
