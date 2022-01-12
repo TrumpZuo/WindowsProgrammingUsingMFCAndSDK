@@ -1,0 +1,9 @@
+﻿  源.cpp
+C:\Users\Administrator\Desktop\WindowsProg\Lab03\ChildWin\ChildWin\源.cpp(171,17): warning C4244: “参数”: 从“TCHAR”转换到“_Elem”，可能丢失数据
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\Administrator\Desktop\WindowsProg\Lab03\ChildWin\ChildWin\源.cpp(174,12): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Administrator\Desktop\WindowsProg\Lab03\ChildWin\ChildWin\源.cpp(283,29): warning C4244: “=”: 从“LONG”转换到“WORD”，可能丢失数据
+  ChildWin.vcxproj -> C:\Users\Administrator\Desktop\WindowsProg\Lab03\ChildWin\Debug\ChildWin.exe
