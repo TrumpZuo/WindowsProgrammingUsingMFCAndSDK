@@ -1,0 +1,45 @@
+
+//强制 主类进行转换，从而访问 子类的成员变量：
+	((CMyLine*)m_searchFig)->m_logPen.lopnColor = change;
+
+
+//调用 通用的颜色对话框，取出选择的值：
+	CColorDialog oc;
+	if (oc.DoModal() == IDOK)
+	{
+		m_color = oc.m_cc.rgbResult;
+	}
+
+	//必须实时进行更新：
+	 Invalidate();
+//通用的字体选择框：得到选择的 字体与字体的颜色
+	CFontDialog ob;
+	if (ob.DoModal() == IDOK)
+	{
+		m_ColorText = ob.m_cf.rgbColors;
+		m_logFont =  *(ob.m_cf.lpLogFont);
+	}
+
+
+
+//取出 RGB的值：
+	int B = m_color >> 16;
+	int G = (m_color >> 8) % 256;
+	int R = m_color % 256;
+	CString str; 
+	str.Format(L"R:%d  G:%d  B:%d", R, G, B);
+	pDC->TextOutW(200, 300, str);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

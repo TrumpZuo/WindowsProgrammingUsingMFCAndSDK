@@ -1,0 +1,64 @@
+//打字游戏，对字符串的消息处理：
+
+void CMFC01View::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	if (m_isStart == true)	
+	      if (nChar == 'F')	
+		m_isStart = false;
+	
+	else
+	{
+	       if (nChar == VK_ESCAPE)		
+		  PostQuitMessage(-1);//退出程序	
+		else
+		{
+		     int pos = m_randString.Find(nChar);
+			if (pos != -1)
+			{
+			        m_randString.Delete(pos, 1);
+			        GameScore += Score_aChar;
+			}
+			if (m_randString.IsEmpty() == true)
+			{
+			         InitLetter(m_randString);
+			         GameScore += Score_aString;
+			}
+		}
+	}
+
+	Invalidate();//必须实时进行更新！！！
+//	InvalidateRect(NULL);//立即进行重绘	
+
+	CView::OnChar(nChar, nRepCnt, nFlags);
+}
+
+
+
+
+//字符串的随机生成：注意是：CString& randString
+void InitLetter(CString& randString )
+{
+	SYSTEMTIME systime;
+	GetSystemTime(&systime); 
+	//为rand()得到随机数作准备;
+	srand(systime.wMilliseconds);
+	for (int i = 0; i < str_length; i++)
+	{		
+	       randString+= (TCHAR)('A' + rand() % 26);
+	}
+}
+
+//在MianFrame中，将在状态栏  中显示 鼠标坐标的 位置：
+void CMainFrame::SetSSMousePos(CString &str)
+{
+	CClientDC dc(this);
+	CSize sz = dc.GetTextExtent(str);
+	m_wndStatusBar.SetPaneInfo(1, 1, SBPS_NORMAL, sz.cx);
+	m_wndStatusBar.SetPaneText(1, str);
+}
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+
+
+//  虚函数中， CString 与 char 直接相加：
+BOOL CMFC03View::OnCommand(WPARAM wParam, LPARAM lParam)
+{
+		char key;
+		key = LOWORD(wParam) + 'a';
+		m_szBuffer += key;
+		Invalidate();
+	return CView::OnCommand(wParam, lParam);
+}
+
+//修改 主窗口中显示的文本的 颜色、背景：
+
+	pDC->SetTextColor(m_color);
+	pDC->SetBkColor(m_back);
+	pDC->TextOutW(200, 300, str);
+	pDC->DrawText(m_str, m_rect, DT_SINGLELINE);
+
+
+//     获得当前的字符串：     OnTimer(UINT_PTR nIDEvent)
+{
+	SYSTEMTIME sysTime;
+	GetLocalTime(&sysTime);
+
+	m_time.Format(L"%d:%d:%d",sysTime.wHour,sysTime.wMinute,sysTime.wSecond);
+	Invalidate();
+	CView::OnTimer(nIDEvent);
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

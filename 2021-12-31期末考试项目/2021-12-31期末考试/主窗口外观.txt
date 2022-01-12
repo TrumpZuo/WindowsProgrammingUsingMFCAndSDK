@@ -1,0 +1,101 @@
+//修改窗口的光标、背景，位于：CMFC03View::OnCreate
+
+
+	HINSTANCE hInstance = (HINSTANCE)GetWindowLong(m_hWnd, GWL_HINSTANCE);
+	SetClassLong(m_hWnd, GCL_HCURSOR, (long)LoadCursor(hInstance, MAKEINTRESOURCE(IDC_MFC03_CURSOR1)));
+	SetClassLong(m_hWnd, GCL_HBRBACKGROUND, (long)GetStockObject(GRAY_BRUSH));
+
+
+
+//修改窗口的图标时：在CMainFrame::OnCreate
+
+	HINSTANCE hInstance = (HINSTANCE)GetWindowLong(m_hWnd, GWL_HINSTANCE);
+	SetClassLong(m_hWnd, GCL_HICON, (long)LoadIcon(hInstance, MAKEINTRESOURCE(IDI_MYICON)) );
+
+
+//设置计时器：OnCreate中：
+
+	SetTimer(1, 1000, NULL);//1为定时器的ID，1s发出TIMER消息：
+
+//TIMER消息处理，得到系统时间：
+
+	SYSTEMTIME sysTime;
+	GetLocalTime(&sysTime);
+
+	m_time.Format(L"%d:%d:%d",sysTime.wHour,sysTime.wMinute,sysTime.wSecond);
+	Invalidate();//必须实时进行显示：
+
+//调出 弹出菜单：
+	CMenu PopMenu;
+	PopMenu.LoadMenu(IDR_POPMENU);
+
+       	ClientToScreen(&point);
+
+	CMenu* SubMenu;
+	SubMenu = PopMenu.GetSubMenu(0);
+	SubMenu->TrackPopupMenu(TPM_RIGHTBUTTON, point.x, point.y, this);
+
+//更新 菜单 选中项 的方法
+void CMFC05View::OnUpdateSelectLine(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_select_mode == SELECT_LINE);
+
+
+
+//修改整个 窗口的 标题： CMainFrame::PreCreateWindow
+
+	cs.style = WS_OVERLAPPEDWINDOW;//修改窗口 标题，首先修改窗口类型；
+	cs.lpszName = "201900800413_左长盛";
+
+
+//主窗口中 添加 button 控件，位于 CMFC03View::OnCreate
+
+	cxChar = LOWORD(GetDialogBaseUnits());
+	cyChar = HIWORD(GetDialogBaseUnits());
+
+	cxChar *= 5;
+	cyChar *= (5 * 0.618);
+
+	for (int cnt = 0; cnt < 26; cnt++)
+	{
+		int x, y;
+		x = cxChar * (cnt % 13);
+		y = cyChar * (cnt / 13);
+
+		hWndButton = CreateWindow(TEXT("button"),			    //窗口类名		
+			ButtonName[cnt],
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // 子窗口 类型：
+			x, y, cxChar, cyChar,					//x,y 坐标； 宽度、高度；
+			 this->m_hWnd,                       //父窗口句柄
+			(HMENU)cnt,		                        //编辑控件子窗口标识，
+			(HINSTANCE)GetWindowLong(this->m_hWnd , GWL_HINSTANCE),
+			NULL);
+	}
+//处理方法
+BOOL CMFC03View::OnCommand(WPARAM wParam, LPARAM lParam)
+{
+		char key;
+		key = LOWORD(wParam) + 'a';
+		m_szBuffer += key;
+		Invalidate();
+	return CView::OnCommand(wParam, lParam);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+//初始化 一个 rect
+	m_rect = new CRect(10 , 10, 300, 300);
+//间接创建字体时：
+
+	CFont font; CFont* pFontOld;
+	GetObject(GetStockObject(SYSTEM_FONT), sizeof(LOGFONT),(PTSTR)&m_logFont);
+	m_logFont.lfHeight = 10;
+	m_logFont.lfWidth =10;
+	font.CreateFontIndirect(&m_logFont); //参数含义1，字体大小，2字体类型，3字体颜色	
+	pFontOld  = pDC->SelectObject(&font);
+
+
+	……
+
+	CFont font;
+	//font.CreateFont(100, _T("华文细黑"), RGB(255, 0, 0)); 
+	//参数含义1，字体大小，2字体类型，3字体颜色
+	font.CreateFontIndirect(&m_logFont);
+	pDC->SelectObject(&font);
+	pDC->SetTextColor(m_color);
+	pDC->TextOut(m_ptS.x, m_ptS.y, m_str);
+
+//创建画笔画刷时：
+      	CPen pen(PS_SOLID, 10/*宽度*/,RGB(255,0,0));
+	CBrush brush(BS_SOLID, RGB(255, 0, 0));
+
+	CClientDC dc( this );
+
+	CPen* pOLdPen = dc.SelectObject(&pen);
+	CBrush* pOLdBrush = dc.SelectObject(&brush);
+
+	dc.Rectangle(CRect(m_ptOrgin, point) );
+
+
+	……
+
+	dc.SelectObject(pOLdPen);
+	dc.SelectObject(pOLdBrush);
+
+
+//一般使用 Indirect 进行赋初值：
+
+		LOGPEN penLine = { m_penStyle , {1,1}, m_penColor };
+		LOGBRUSH brushRect =  {BS_SOLID,m_brushColor,HS_VERTICAL };
+		CPen pen;
+		pen.CreatePenIndirect(&penLine);
+//调用 hdc:
+	CClientDC dc(this);

@@ -1,0 +1,87 @@
+//使用 CList:	CList < CFigure*, CFigure* &>  m_FIGS;
+
+//析构 函数、clearBuffer
+	POSITION pos = m_allFigure.GetHeadPosition();
+	while (pos != NULL)
+	{
+		delete  m_allFigure.GetNext(pos);
+	}
+	m_allFigure.RemoveAll();
+
+//新建 、加载时 ，需要将 CList 清空：
+// CMFC05Doc::Serialize  保存 、 打开 文件：
+	if (ar.IsStoring())
+	{
+		POSITION pos = m_allFigure.GetHeadPosition();
+
+		UINT cntFigure = m_allFigure.GetCount();
+		ar << cntFigure;//保存 图形的总数；
+		while (pos != NULL)
+		{
+			CFigure* saveFigure = m_allFigure.GetAt(pos);//  Next(pos);
+			ar << saveFigure->m_type;
+			saveFigure->Save(ar);
+			m_allFigure.GetNext(pos);
+		}	
+	}
+	else
+	{
+		clearBuffer();
+		UINT cntFigure ;
+		ar >> cntFigure;//保存 图形的总数；	
+		for(int i=0;i<cntFigure ;i++)
+		{
+			CFigure* loadFigure = NULL;
+			UINT  type;ar >> type;
+			switch (type)
+			{
+			case SELECT_LINE:
+				loadFigure = new CMyLine();
+				break;
+			case SELECT_RECT:
+				loadFigure = new CMyRect();
+				break;
+			case SELECT_ELLP:
+				loadFigure = new CMyEllp();
+				break;
+			case SELECT_TEXT:
+				loadFigure = new CMyText();
+				break;
+			default:
+				break;
+			}
+			if (loadFigure != NULL)
+			{
+				loadFigure->Load(ar);
+				m_allFigure.AddTail(loadFigure);
+			}
+		}
+	}	
+
+//绘制的 函数 中：CMFC05View::OnDraw
+
+POSITION pos = pDoc->m_allFigure.GetHeadPosition();
+	while (pos != NULL)
+	{
+		pDoc->m_allFigure.GetAt(pos)->Draw(pDC);
+		pDoc->m_allFigure.GetNext(pos);
+	}
+
+
+//向list中添加元素：
+BOOL CLab06Doc::AddOneFigure(CFigure* pFlg)
+{
+	m_FIGS.AddTail(pFlg);
+	SetModifiedFlag();//此函数用来表明用户是否修改了属性页面,确认弹窗
+	return true;
+
+//外界 访问 doc类 时：
+
+	GetDocument()->AddOneFigure(pFig);//放入文档中，
+
+
+
+
+
+
+
