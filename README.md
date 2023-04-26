@@ -1,5 +1,9 @@
 # WindowsProgrammingUsingMFCAndSDK
-山东大学（威海）2019级老学长-面向对象编程课程学习，实验与期末复习。
 
-如文件损毁，可登录Github查找仓库TrumpZuo/WindowsProgrammingUsingMFCAndSDK；
-若产生其他问题，可联系s17762070039@outlook.com
+## gitHub地址
+TrumpZuo/WindowsProgrammingUsingMFCAndSDK；
+## 面向对象课程设计
+使用MFC或SDK进行的各种实验项目，推荐使用MFC。
+## 课程仓库
+实验报告可能已经被较多引用，且用且珍惜。
+
